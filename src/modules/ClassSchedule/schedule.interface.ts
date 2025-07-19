@@ -1,7 +1,6 @@
 import { Types } from 'mongoose';
 
 export interface ISchedule {
-  _id: any;
   className: string;
   description: string;
   date: string;
