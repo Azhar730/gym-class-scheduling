@@ -19,6 +19,11 @@ const registerAdminIntoDB = async (payload: IAdmin) => {
   userData.email = payload.email;
   userData.password = payload.password;
 
+  const existUser = await User.findOne({ email: payload.email });
+  if (existUser) {
+    throw new AppError(409, 'User with this email already exists!');
+  }
+
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -48,6 +53,11 @@ const registerTrainerIntoDB = async (payload: ITrainer) => {
   userData.email = payload.email;
   userData.password = payload.password;
 
+  const existUser = await User.findOne({ email: payload.email });
+  if (existUser) {
+    throw new AppError(409, 'User with this email already exists!');
+  }
+
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
@@ -76,6 +86,11 @@ const registerTraineeIntoDB = async (payload: ITrainee) => {
   userData.role = 'trainee';
   userData.email = payload.email;
   userData.password = payload.password;
+
+  const existUser = await User.findOne({ email: payload.email });
+  if (existUser) {
+    throw new AppError(409, 'User with this email already exists!');
+  }
 
   const session = await mongoose.startSession();
   try {
